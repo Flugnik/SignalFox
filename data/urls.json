@@ -1,0 +1,40 @@
+{
+  "urls": [
+    {
+      "id": "1756988652444",
+      "url": "https://ru.tradingview.com/chart/4bXWtkrP/?symbol=RUS%3ASMLT",
+      "addedAt": "2025-09-04T12:24:12.444Z"
+    },
+    {
+      "id": "1757184894459",
+      "url": "https://ru.tradingview.com/chart/?symbol=MOEX%3ASBER&interval=1D",
+      "addedAt": "2025-09-06T18:54:54.459Z"
+    },
+    {
+      "id": "1757185092075",
+      "url": "https://ru.tradingview.com/chart/?symbol=MOEX%3AMRKC&interval=1D",
+      "addedAt": "2025-09-06T18:58:12.075Z"
+    },
+    {
+      "id": "1757185122332",
+      "url": "https://ru.tradingview.com/chart/?symbol=MOEX%3APLZL&interval=1D",
+      "addedAt": "2025-09-06T18:58:42.332Z"
+    },
+    {
+      "id": "1757185155579",
+      "url": "https://ru.tradingview.com/chart/?symbol=MOEX%3ASVETP&interval=1D",
+      "addedAt": "2025-09-06T18:59:15.579Z"
+    },
+    {
+      "id": "1757185184564",
+      "url": "https://ru.tradingview.com/chart/?symbol=MOEX%3ALENT&interval=1D",
+      "addedAt": "2025-09-06T18:59:44.564Z"
+    },
+    {
+      "id": "1757185215327",
+      "url": "https://ru.tradingview.com/chart/?symbol=MOEX%3AGMKN&interval=1D",
+      "addedAt": "2025-09-06T19:00:15.327Z"
+    }
+  ],
+  "adminChatId": 849381125
+}
