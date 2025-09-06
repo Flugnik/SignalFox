@@ -1,0 +1,57 @@
+name: Automated Screenshots
+
+on:
+  schedule:
+    # Запуск каждый час с 9:00 до 18:00 (UTC), понедельник-пятница
+    - cron: '0 9-18 * * 1-5'
+    # Дополнительные расписания можно добавить здесь
+    # - cron: '0 12 * * *'  # каждый день в 12:00
+  workflow_dispatch: # Возможность запуска вручную
+
+jobs:
+  screenshot:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Install Playwright browsers
+      run: |
+        npx playwright install firefox --with-deps
+        npx playwright install chromium --with-deps
+      
+    - name: Create data directory
+      run: mkdir -p data
+      
+    - name: Create cookies file (if available)
+      run: |
+        if [ -n "${{ secrets.TRADINGVIEW_COOKIES }}" ]; then
+          echo '${{ secrets.TRADINGVIEW_COOKIES }}' > data/cookies.json
+          echo "✅ Cookies loaded from secrets"
+        else
+          echo "⚠️ No cookies secret found, will proceed without authorization"
+        fi
+      
+    - name: Take screenshots and send to Telegram
+      env:
+        TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+        NODE_ENV: screenshot
+      run: node src/index.js --screenshot
+      
+    - name: Upload screenshots as artifacts (optional)
+      if: failure()
+      uses: actions/upload-artifact@v4
+      with:
+        name: screenshots
+        path: screenshots/
+        retention-days: 7

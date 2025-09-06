@@ -1,0 +1,30 @@
+{
+  "name": "signal-fox-bot",
+  "version": "1.0.0",
+  "description": "Automated screenshot bot for trading signals",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "screenshot": "node src/screenshot.js"
+  },
+  "keywords": [
+    "telegram",
+    "bot",
+    "screenshot",
+    "trading",
+    "playwright"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@playwright/mcp": "github:microsoft/playwright-mcp",
+    "dotenv": "^16.4.5",
+    "node-telegram-bot-api": "^0.66.0",
+    "playwright": "^1.44.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
