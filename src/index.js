@@ -22,9 +22,28 @@ async function runScheduledScreenshots() {
         for (const result of results) {
             if (result.success) {
                 try {
-                    await bot.sendScreenshotToAdmin(result.url, result.screenshotPath);
-                    await fs.unlink(result.screenshotPath);
-                    console.log(`Sent and cleaned up screenshot for ${result.url}`);
+                    // Обрабатываем новый формат результата
+                    let screenshotPath, instrumentName, originalUrl;
+                    if (typeof result.screenshotPath === 'string') {
+                        // Старый формат
+                        screenshotPath = result.screenshotPath;
+                        instrumentName = 'Unknown';
+                        originalUrl = result.url;
+                    } else if (result.screenshotPath && typeof result.screenshotPath === 'object') {
+                        // Новый формат - результат из screenshot функции
+                        screenshotPath = result.screenshotPath.path;
+                        instrumentName = result.screenshotPath.instrumentName || 'Unknown';
+                        originalUrl = result.screenshotPath.url || result.url;
+                    } else {
+                        // Прямой путь
+                        screenshotPath = result.screenshotPath;
+                        instrumentName = 'Unknown';
+                        originalUrl = result.url;
+                    }
+                    
+                    await bot.sendScreenshotToAdmin(originalUrl, screenshotPath, instrumentName);
+                    await fs.unlink(screenshotPath);
+                    console.log(`Sent and cleaned up screenshot for ${originalUrl}`);
                 } catch (error) {
                     console.error(`Failed to send screenshot for ${result.url}:`, error);
                 }

@@ -275,12 +275,12 @@ ${presetsInfo}
         }
     }
 
-    async sendScreenshotToAdmin(url, screenshotPath) {
+    async sendScreenshotToAdmin(url, screenshotPath, instrumentName = 'Unknown') {
         const data = await this.loadData();
         if (data.adminChatId) {
             try {
                 await this.bot.sendPhoto(data.adminChatId, screenshotPath, {
-                    caption: `📊 Скриншот: ${url}\\n⏰ ${new Date().toLocaleString('ru-RU')}`
+                    caption: `📈 ${instrumentName}\n\n🔗 ${url}`
                 });
             } catch (error) {
                 console.error('Error sending screenshot to admin:', error);
